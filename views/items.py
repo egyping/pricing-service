@@ -1,6 +1,6 @@
-from flask import Flask, Blueprint,render_template, request
+from flask import Blueprint, render_template, request
 from models.item import Item
-import json
+
 
 item_blueprint = Blueprint('items', __name__)
 
@@ -9,7 +9,7 @@ def index():
     items = Item.all()
     return render_template('items/index.html', items=items)
 
-@item_blueprint.route('/', methods=['GET', 'POST'])
+@item_blueprint.route('/new', methods=['GET', 'POST'])
 def new_item():
     if request.method == 'POST':
         url = request.form['url']

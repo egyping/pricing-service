@@ -1,12 +1,14 @@
-import re
-import requests
 import uuid
-from bs4 import BeautifulSoup
-
 from models.model import Model
+from typing import Dict
+import requests
+from bs4 import BeautifulSoup
+import re
+
 
 class Item(Model):
     collection = "items"
+
     def __init__(self, url: str, tag_name: str, query: Dict, _id: str = None):
         super().__init__()
         self.url = url
@@ -26,6 +28,7 @@ class Item(Model):
         soup = BeautifulSoup(content, "html.parser")
         element = soup.find(self.tag_name, self.query)
         string_price = element.text.strip()
+
         pattern = re.compile(r"(\d+,?\d*\.\d\d)")
         match = pattern.search(string_price)
         found_price = match.group(1)
@@ -40,8 +43,6 @@ class Item(Model):
             "tag_name": self.tag_name,
             "query": self.query
         }
-
-
 
 
 
