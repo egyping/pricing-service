@@ -1,6 +1,6 @@
 from alert import Alert
 
-alerts = Alert.all
+alerts = Alert.all()
 
 for alert in alerts:
     alert.load_item_price()
